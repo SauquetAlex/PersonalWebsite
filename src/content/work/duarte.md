@@ -1,7 +1,7 @@
 ---
 title: "Duarte"
 subtitle: "Jr. AI Engineer Intern"
-logo: "/src/assets/duarte_design_logo.jpeg"
+logo: "/images/work/duarte_design_logo.jpeg"
 startDate: "2024-05-01"
 endDate: "2024-08-01"
 link: "https://www.duarte.com/"

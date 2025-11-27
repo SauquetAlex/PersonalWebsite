@@ -39,6 +39,7 @@ const projects = defineCollection({
     skills: z.array(z.string()),
     demoLink: z.string().url().optional(),
     sourceLink: z.string().url().optional(),
+    projectLink: z.string().url().optional(),
   }),
 });
 
@@ -53,6 +54,7 @@ const hackathons = defineCollection({
     endDate: z.coerce.date().optional(),
     logo: z.string().optional(),
     sourceLink: z.string().url().optional(),
+    projectLink: z.string().url().optional(),
   }),
 });
 

@@ -1,7 +1,7 @@
 ---
 title: "CAST Software"
 subtitle: "Intern AI"
-logo: "/src/assets/cast_software_logo.jpeg"
+logo: "/images/work/cast_software_logo.jpeg"
 startDate: "2025-05-01"
 endDate: "2025-08-01"
 link: "https://www.castsoftware.com/"
