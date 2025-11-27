@@ -2,8 +2,8 @@
 title: "Probability Management"
 subtitle: "Intern"
 logo: "/images/work/probability_management_inc_logo.jpeg"
-startDate: "2022-07-01"
-endDate: "2023-07-01"
+startDate: "2022-06-16"
+endDate: "2023-06-17"
 link: "https://www.probabilitymanagement.org/"
 ---
 

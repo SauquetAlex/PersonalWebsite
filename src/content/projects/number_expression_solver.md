@@ -4,6 +4,6 @@ description: "A Python solver that exhaustively finds all possible mathematical 
 image: "/public/images/projects/number_expression_solver.png"
 startDate: "2025-10-31"
 endDate: "2025-11-10"
-skills: ["Python", "Reverse Polish Notation", "Multiprocessing", "Tree structure"]
+skills: ["Python", "Combinatorial Optimization", "Multiprocessing"]
 sourceLink: "https://github.com/SauquetAlex/Number-Expression-Solver"
 ---
