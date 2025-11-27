@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Timeline from "../components/Timeline.astro";
+import Projects from "../components/Projects.astro";
+import Blog from "../components/Blog.astro";
+import Hackathons from "../components/Hackathons.astro";
+import Contact from "../components/Contact.astro";
+import { Briefcase, GraduationCap } from "@lucide/astro";
+import { getEntry, render } from "astro:content";
+import { siteConfig } from "../config";
+import bloomfolioLogo from "../assets/bloomfolio.png";
+
+// Load about content
+const aboutEntry = await getEntry("about", "about");
+const { Content: AboutContent } = await render(aboutEntry);
+---
+
+<Layout
+  title={`${siteConfig.name} - Portfolio`}
+  description={siteConfig.description}
+>
+  <main>
+    <!-- Hero Section (Always visible) -->
+    <Hero
+      name={siteConfig.name}
+      title={siteConfig.title}
+      description={siteConfig.description}
+      avatar={bloomfolioLogo}
+      location={siteConfig.location}
+      socialLinks={siteConfig.socialLinks}
+    />
+
+    <!-- About Section -->
+    {
+      siteConfig.sections.about && (
+        <About
+          title={aboutEntry.data.title}
+          photo={aboutEntry.data.photo}
+          Content={AboutContent}
+        />
+      )
+    }
+
+    <!-- Projects Section -->
+    {siteConfig.sections.projects && <Projects />}
+
+    <!-- Blog Section -->
+    {siteConfig.sections.blog && <Blog />}
+
+    <!-- Work Experience Section -->
+    {
+      siteConfig.sections.work && (
+        <Timeline
+          collection="work"
+          variant="timeline"
+          color="primary"
+          icon={Briefcase}
+          sectionTitle="Work Experience"
+        />
+      )
+    }
+
+    <!-- Education Section -->
+    {
+      siteConfig.sections.education && (
+        <Timeline
+          collection="education"
+          variant="list"
+          color="secondary"
+          backgroundColor="base-300"
+          icon={GraduationCap}
+          sectionTitle="Education"
+        />
+      )
+    }
+
+    <!-- Hackathons Section -->
+    {siteConfig.sections.hackathons && <Hackathons />}
+
+    <!-- Contact Section -->
+    {siteConfig.sections.contact && <Contact />}
+  </main>
+</Layout>

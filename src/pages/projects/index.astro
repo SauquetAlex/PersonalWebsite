@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const projects = await getCollection("projects");
+
+// Sort by start date, most recent first
+const sortedProjects = projects.sort(
+  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime()
+);
+---
+
+<Layout
+  title="Projects - Bloomfolio"
+  description="Explore my latest projects and work"
+>
+  <main class="max-w-6xl mx-auto px-4 py-20">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold mb-4">Projects</h1>
+      <p class="text-xl text-base-content/70">
+        A collection of projects I've worked on, showcasing my skills and
+        experience.
+      </p>
+    </div>
+
+    <!-- Back to Home -->
+    <div class="mb-8">
+      <a href="/" class="btn btn-ghost btn-sm">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        Back to Home
+      </a>
+    </div>
+
+    <!-- Projects Grid -->
+    {
+      sortedProjects.length === 0 ? (
+        <div class="text-center py-20">
+          <p class="text-2xl text-base-content/60">
+            No projects yet. Check back soon!
+          </p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedProjects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      )
+    }
+  </main>
+</Layout>

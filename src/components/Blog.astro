@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "./BlogCard.astro";
+import { ArrowRight } from "@lucide/astro";
+
+const blogEntries = await getCollection("blog");
+
+// Sort by publish date, most recent first
+const sortedPosts = blogEntries.sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+// Get only the latest 3 posts
+const latestPosts = sortedPosts.slice(0, 3);
+---
+
+<section id="blog" class="py-20 px-4 bg-base-300">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Latest Blog Posts</h2>
+      <p class="text-lg text-base-content/70">
+        Thoughts, insights, and tutorials on web development, design, and
+        technology.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {latestPosts.map((post) => <BlogCard post={post} />)}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/blog" class="btn btn-primary gap-2">
+        View All Posts
+        <ArrowRight class="size-4" />
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,605 @@
+---
+title: "Markdown & MDX Guide"
+description: "Master Markdown syntax and MDX features in Bloomfolio. Learn how to create rich, formatted content with embedded media components."
+image: "../placeholder-blog.png"
+publishDate: "2025-11-03"
+tags: ["Guide", "Markdown", "MDX", "Writing"]
+---
+
+## What is Markdown?
+
+Markdown is a lightweight markup language that lets you format text using simple, readable syntax. It's widely used for documentation, blog posts, and README files because it's easy to write and read.
+
+## What is MDX?
+
+MDX is an extension of Markdown that allows you to use JSX (JavaScript XML) within your markdown files. This means you can import and use React/Astro components directly in your content, creating interactive and rich media experiences.
+
+## Markdown Syntax Guide
+
+### Headings
+
+Create headings using `#` symbols. More `#` symbols mean smaller headings.
+
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+```
+
+**Best Practice**: Use only one H1 per page (your title), and maintain proper heading hierarchy (don't skip levels).
+
+---
+
+### Text Formatting
+
+```markdown
+**Bold text** or __Bold text__
+*Italic text* or _Italic text_
+***Bold and italic*** or ___Bold and italic___
+~~Strikethrough text~~
+`Inline code`
+```
+
+**Renders as**:
+- **Bold text**
+- *Italic text*
+- ***Bold and italic***
+- ~~Strikethrough~~
+- `Inline code`
+
+---
+
+### Lists
+
+**Unordered Lists**:
+```markdown
+- Item 1
+- Item 2
+  - Nested item 2.1
+  - Nested item 2.2
+- Item 3
+```
+
+**Ordered Lists**:
+```markdown
+1. First item
+2. Second item
+3. Third item
+   1. Nested item
+   2. Another nested item
+```
+
+**Task Lists** (GitHub-style):
+```markdown
+- [x] Completed task
+- [ ] Incomplete task
+- [ ] Another task
+```
+
+---
+
+### Links
+
+```markdown
+[Link text](https://example.com)
+[Link with title](https://example.com "Hover text")
+[Reference-style link][1]
+
+[1]: https://example.com "Reference URL"
+```
+
+**Internal Links** (within your site):
+```markdown
+[About Page](/about)
+[Blog Post](/blog/my-post)
+[Project](/projects/my-project)
+```
+
+---
+
+### Images
+
+```markdown
+![Alt text](./image.png)
+![Image with title](./image.png "Image title")
+```
+
+**Best Practices**:
+- Always include descriptive alt text for accessibility
+- Use relative paths for local images (`./image.png`)
+- Optimize images before adding (aim for < 1MB)
+- Use meaningful filenames
+
+**Example**:
+```markdown
+![A developer coding at a modern workspace with dual monitors](./workspace.jpg)
+```
+
+---
+
+### Code Blocks
+
+**Inline Code**: Use single backticks
+```markdown
+Use `const` for variables that won't change.
+```
+
+**Code Blocks**: Use triple backticks with language specification
+
+````markdown
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+console.log(greet("World"));
+```
+````
+
+**Supported Languages**:
+- `javascript` / `js`
+- `typescript` / `ts`
+- `python`
+- `bash` / `sh`
+- `css`
+- `html`
+- `json`
+- `yaml`
+- `markdown` / `md`
+- And many more!
+
+**Code Block with Title**:
+````markdown
+```javascript title="greet.js"
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+````
+
+---
+
+### Blockquotes
+
+```markdown
+> This is a blockquote.
+> It can span multiple lines.
+>
+> And have multiple paragraphs.
+```
+
+**Renders as**:
+> This is a blockquote.
+> It can span multiple lines.
+
+**Nested Blockquotes**:
+```markdown
+> First level
+>> Second level
+>>> Third level
+```
+
+---
+
+### Horizontal Rules
+
+Create dividers using three or more hyphens, asterisks, or underscores:
+
+```markdown
+---
+***
+___
+```
+
+All render as a horizontal line.
+
+---
+
+### Tables
+
+```markdown
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+```
+
+**Alignment**:
+```markdown
+| Left aligned | Center aligned | Right aligned |
+|:-------------|:--------------:|--------------:|
+| Left         | Center         | Right         |
+```
+
+---
+
+## MDX Features
+
+MDX allows you to import and use components within your markdown files. This is only available in `.mdx` files (not `.md`).
+
+### When to Use MDX vs MD
+
+**Use `.md` when**:
+- Writing simple blog posts
+- No need for interactive components
+- Standard markdown is sufficient
+
+**Use `.mdx` when**:
+- Embedding media (Spotify, YouTube, Twitter)
+- Creating interactive content
+- Using custom components
+- Need advanced formatting
+
+### Importing Components
+
+At the top of your `.mdx` file, import the components you need:
+
+```jsx
+---
+title: "My Post"
+description: "Post description"
+publishDate: "2024-01-27"
+---
+
+import Spotify from '../../components/Spotify.astro';
+import YouTube from '../../components/YouTube.astro';
+import Twitter from '../../components/Twitter.astro';
+
+# My Post Content
+
+Regular markdown content here...
+```
+
+### Available Media Components
+
+Bloomfolio includes three built-in media components for rich content:
+
+#### Spotify Component
+
+Embed Spotify tracks, albums, playlists, or podcasts:
+
+```jsx
+<Spotify url="https://open.spotify.com/track/..." />
+```
+
+#### YouTube Component
+
+Embed YouTube videos using either ID or full URL:
+
+```jsx
+<YouTube id="video-id" />
+<!-- OR -->
+<YouTube url="https://youtube.com/watch?v=..." />
+```
+
+#### Twitter Component
+
+Embed tweets using URL or ID:
+
+```jsx
+<Twitter url="https://x.com/user/status/..." />
+<!-- OR -->
+<Twitter id="tweet-id" username="username" />
+```
+
+### Live Examples
+
+Want to see these components in action? Check out the **[Rich Media Embeds Example](/blog/embed-examples)** page which demonstrates all three media components with live examples.
+
+---
+
+## Writing Best Practices
+
+### 1. Structure Your Content
+
+**Good Structure**:
+```markdown
+# Main Title
+
+Introduction paragraph explaining what the post is about.
+
+## First Section
+
+Content for the first section...
+
+### Subsection
+
+More detailed information...
+
+## Second Section
+
+Content for the second section...
+
+## Conclusion
+
+Summary and next steps...
+```
+
+### 2. Use Meaningful Headings
+
+**Good**:
+- `## Installation Steps`
+- `## Common Errors and Solutions`
+- `## Performance Optimization`
+
+**Avoid**:
+- `## Part 1`
+- `## More Information`
+- `## Details`
+
+### 3. Break Up Long Paragraphs
+
+Keep paragraphs to 2-4 sentences for better readability:
+
+**Good**:
+```markdown
+Markdown is easy to learn. It uses simple, intuitive syntax that mirrors
+how people naturally format text in emails.
+
+The beauty of Markdown is its readability. Even in raw form, it's easy
+to understand what the formatted output will look like.
+```
+
+**Avoid**:
+```markdown
+Markdown is easy to learn and it uses simple, intuitive syntax that mirrors how people naturally format text in emails and the beauty of Markdown is its readability because even in raw form, it's easy to understand what the formatted output will look like and it makes writing documentation much faster.
+```
+
+### 4. Use Code Examples
+
+When explaining technical concepts, include code examples:
+
+```markdown
+## Using Array Methods
+
+The `map()` method creates a new array:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+```
+```
+
+### 5. Include Visual Breaks
+
+Use horizontal rules, blockquotes, or images to break up long sections of text:
+
+```markdown
+## Long Topic
+
+First part of the content...
+
+---
+
+Second part of the content...
+
+> Important note: This is a key point to remember.
+
+Final part of the content...
+```
+
+### 6. Link to Related Content
+
+Help readers discover more:
+
+```markdown
+For more information on setting up your portfolio, check out the
+[Complete Guide](/blog/guides/bloomfolio-complete-guide).
+
+Learn how to structure your content in the
+[Content Collections Guide](/blog/guides/content-collections-guide).
+```
+
+---
+
+## SEO Best Practices
+
+### Write Good Meta Descriptions
+
+Your frontmatter description is used for SEO:
+
+```yaml
+---
+description: "Learn Markdown syntax and MDX features in Bloomfolio with this comprehensive guide."
+---
+```
+
+**Tips**:
+- Keep under 160 characters
+- Include primary keywords
+- Make it compelling
+- Describe what readers will learn
+
+### Use Descriptive Alt Text
+
+```markdown
+![A comparison chart showing Markdown syntax on the left and rendered HTML on the right](./markdown-vs-html.png)
+```
+
+### Structure with Headings
+
+Search engines use headings to understand content structure. Use them logically:
+
+```markdown
+# Main Topic (H1 - only one per page)
+## Major Section (H2)
+### Subsection (H3)
+#### Minor Point (H4)
+```
+
+### Internal Linking
+
+Link to other pages on your site:
+
+```markdown
+Check out my [E-commerce project](/projects/ecommerce-platform) for a
+practical example.
+```
+
+---
+
+## Accessibility Tips
+
+### 1. Meaningful Link Text
+
+**Good**:
+```markdown
+Learn more about [Markdown syntax](https://example.com).
+```
+
+**Avoid**:
+```markdown
+Learn more [here](https://example.com).
+```
+
+### 2. Image Alt Text
+
+Describe the image content, not just what it is:
+
+**Good**:
+```markdown
+![Bar chart showing 50% improvement in page load times after optimization](./performance-chart.png)
+```
+
+**Avoid**:
+```markdown
+![Chart](./performance-chart.png)
+```
+
+### 3. Heading Hierarchy
+
+Don't skip heading levels:
+
+**Good**:
+```markdown
+# Title
+## Section
+### Subsection
+```
+
+**Avoid**:
+```markdown
+# Title
+### Subsection  <!-- Skipped H2 -->
+```
+
+---
+
+## Common Mistakes to Avoid
+
+### 1. Inconsistent Spacing
+
+Markdown needs blank lines between elements:
+
+**Correct**:
+```markdown
+## Heading
+
+Paragraph text here.
+
+- List item 1
+- List item 2
+```
+
+**Incorrect**:
+```markdown
+## Heading
+Paragraph text here.
+- List item 1
+- List item 2
+```
+
+### 2. Not Escaping Special Characters
+
+If you need to display special characters literally, escape them with `\`:
+
+```markdown
+\*This text has literal asterisks\*
+\# This is not a heading
+```
+
+### 3. Mixing Markdown and HTML Unnecessarily
+
+While you can use HTML in Markdown, it's better to use Markdown syntax when possible:
+
+**Prefer**:
+```markdown
+**Bold text**
+```
+
+**Over**:
+```html
+<strong>Bold text</strong>
+```
+
+---
+
+## Markdown Cheat Sheet
+
+Quick reference for common syntax:
+
+```markdown
+# H1
+## H2
+### H3
+
+**bold**
+*italic*
+~~strikethrough~~
+`code`
+
+- Bullet list
+1. Numbered list
+
+[Link](url)
+![Image](url)
+
+> Blockquote
+
+---
+
+```code block```
+
+| Table | Header |
+|-------|--------|
+| Cell  | Cell   |
+```
+
+---
+
+## Tools & Resources
+
+### Editors
+
+- **VS Code**: Excellent Markdown support with preview
+- **Typora**: WYSIWYG Markdown editor
+- **Obsidian**: Note-taking with Markdown
+- **MarkText**: Free, open-source Markdown editor
+
+### VS Code Extensions
+
+- **Markdown All in One**: Shortcuts and preview
+- **markdownlint**: Linting and style checking
+- **Markdown Preview Enhanced**: Advanced preview features
+
+### Online Tools
+
+- **StackEdit**: Browser-based Markdown editor
+- **Dillinger**: Online Markdown editor with live preview
+- **Markdown Guide**: Comprehensive Markdown reference
+
+---
+
+## Next Steps
+
+Now that you understand Markdown and MDX:
+
+1. **Create Content**: Start writing blog posts with your new skills
+2. **Experiment with MDX**: Try the [embed examples](/blog/embed-examples) in your own posts
+3. **Check Content Guide**: Review the [Content Collections Guide](/blog/guides/content-collections-guide) for schema details
+4. **Read Complete Guide**: See the [Bloomfolio Complete Guide](/blog/guides/bloomfolio-complete-guide) for full setup
+
+Happy writing! 🌼

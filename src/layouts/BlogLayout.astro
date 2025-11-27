@@ -1,0 +1,118 @@
+---
+import Layout from './Layout.astro';
+import { Image } from 'astro:assets';
+import SkillBadge from '../components/SkillBadge.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  image: any;
+  tags?: string[];
+}
+
+const { title, description, publishDate, updatedDate, image, tags } = Astro.props;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+// Calculate reading time (rough estimate based on word count)
+const content = await Astro.slots.render('default');
+const wordCount = content.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200); // Average reading speed: 200 words/min
+---
+
+<Layout title={title} description={description}>
+  <article class="max-w-4xl mx-auto px-4 py-20">
+    <!-- Back button -->
+    <div class="mb-8">
+      <a href="/blog" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Blog
+      </a>
+    </div>
+
+    <!-- Featured Image -->
+    {image && (
+      <figure class="mb-8 rounded-2xl overflow-hidden">
+        <Image
+          src={image}
+          alt={title}
+          class="w-full aspect-video object-cover"
+          width={1200}
+          height={630}
+        />
+      </figure>
+    )}
+
+    <!-- Post Header -->
+    <header class="mb-8">
+      <h1 class="text-5xl font-bold mb-4">{title}</h1>
+      <p class="text-xl text-base-content/70 mb-4">{description}</p>
+
+      <div class="flex flex-wrap items-center gap-4 text-sm text-base-content/60">
+        <time datetime={publishDate.toISOString()}>
+          {formatDate(publishDate)}
+        </time>
+        <span>•</span>
+        <span>{readingTime} min read</span>
+        {updatedDate && (
+          <>
+            <span>•</span>
+            <span>Updated: {formatDate(updatedDate)}</span>
+          </>
+        )}
+      </div>
+
+      {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {tags.map((tag) => (
+            <SkillBadge skill={tag} />
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Post Content -->
+    <div class="max-w-none leading-7
+      [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4
+      [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4
+      [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-4
+      [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-8 [&_h4]:mb-4
+      [&_h5]:text-lg [&_h5]:font-bold [&_h5]:mt-8 [&_h5]:mb-4
+      [&_h6]:text-base [&_h6]:font-bold [&_h6]:mt-8 [&_h6]:mb-4
+      [&_p]:mb-4
+      [&_a]:underline [&_a]:link
+      [&_ul]:mb-4 [&_ul]:ml-6 [&_ul]:list-disc [&_ul]:list-outside
+      [&_ol]:mb-4 [&_ol]:ml-6 [&_ol]:list-decimal [&_ol]:list-outside
+      [&_li]:mb-2
+      [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:bg-base-200
+      [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4 [&_pre]:bg-base-200
+      [&_pre_code]:bg-transparent [&_pre_code]:p-0
+      [&_blockquote]:border-l-4 [&_blockquote]:border-base-300 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4
+      [&_img]:rounded-lg [&_img]:my-6">
+      <slot />
+    </div>
+
+    <!-- Divider -->
+    <div class="divider mt-12"></div>
+
+    <!-- Back to blog link -->
+    <div class="text-center mt-8">
+      <a href="/blog" class="btn btn-primary">
+        View All Posts
+      </a>
+    </div>
+  </article>
+</Layout>
