@@ -13,6 +13,7 @@ interface Props {
   skills: string[];
   demoLink?: string;
   sourceLink?: string;
+  projectLink?: string;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   skills,
   demoLink,
   sourceLink,
+  projectLink,
 } = Astro.props;
 
 function formatPeriod(startDate: Date, endDate?: Date) {
@@ -118,7 +120,7 @@ function calculateDuration(startDate: Date, endDate?: Date) {
 
       <!-- Prominent Action Buttons -->
       {
-        (demoLink || sourceLink) && (
+        (demoLink || sourceLink || projectLink) && (
           <div class="flex flex-wrap gap-3 mb-6">
             {demoLink && (
               <a
@@ -150,6 +152,17 @@ function calculateDuration(startDate: Date, endDate?: Date) {
                 View Source
               </a>
             )}
+            {projectLink && (
+                    <a
+                      href={projectLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn-primary gap-2"
+                    >
+                      <ExternalLink class="size-5" />
+                      View Project
+                    </a>
+                  )}
           </div>
         )
       }
