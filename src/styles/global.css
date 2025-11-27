@@ -2,3 +2,12 @@
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, synthwave, retro, valentine, dim, nord;
 };
+
+.prose a {
+  color: hsl(var(--p));
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  opacity: 0.8;
+}
