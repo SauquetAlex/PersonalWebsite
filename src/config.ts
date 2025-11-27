@@ -97,7 +97,7 @@ export interface SiteConfig {
  */
 export const siteConfig: SiteConfig = {
   name: "Alexandre Sauquet",
-  title: "CS @ Purdue",
+  title: "CS @ Purdue '27",
   description:
     `I'm a third year student at Purdue University studying Computer Science, Artificial Intelligence, Statistics, and Mathematics. ` +
     `I'm particularly interested in machine learning and algorithms, with a focus on optimization methods and their real-world applications. ` +
