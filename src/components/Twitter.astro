@@ -1,0 +1,63 @@
+---
+interface Props {
+  id?: string;
+  username?: string;
+  url?: string;
+}
+
+const { id, username, url } = Astro.props;
+
+let tweetId = id;
+let tweetUsername = username;
+
+if (url && (!tweetId || !tweetUsername)) {
+  // Handle Twitter/X URL formats:
+  // - https://twitter.com/username/status/TWEET_ID
+  // - https://x.com/username/status/TWEET_ID
+  const urlPattern = /(?:twitter\.com|x\.com)\/([^/]+)\/status\/(\d+)/;
+  const match = url.match(urlPattern);
+
+  if (match) {
+    tweetUsername = tweetUsername || match[1];
+    tweetId = tweetId || match[2];
+  }
+}
+
+if (!tweetId || !tweetUsername) {
+  throw new Error('Twitter component requires either a "url" prop or both "id" and "username" props');
+}
+
+const tweetUrl = `https://twitter.com/${tweetUsername}/status/${tweetId}`;
+const embedId = `tweet-${tweetId}`;
+---
+
+<div class="twitter-embed my-6">
+  <blockquote class="twitter-tweet" data-theme="dark">
+    <a href={tweetUrl}></a>
+  </blockquote>
+</div>
+
+<script is:inline>
+  // Load Twitter embed script if not already loaded
+  if (!window.twttr) {
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));
+  } else if (window.twttr && window.twttr.widgets) {
+    // Re-render widgets if script already loaded
+    window.twttr.widgets.load();
+  }
+</script>

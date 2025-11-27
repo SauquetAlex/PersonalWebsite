@@ -1,0 +1,182 @@
+---
+import { getCollection, render } from "astro:content";
+
+interface Props {
+  collection: "work" | "education";
+  variant: "timeline" | "list";
+  color?: string;
+  backgroundColor?: string;
+  icon: any; // Pass the icon component directly
+  sectionTitle: string;
+  sectionSubtitle?: string;
+}
+
+const {
+  collection,
+  variant,
+  color = "primary",
+  backgroundColor = "base-200",
+  icon,
+  sectionTitle,
+  sectionSubtitle,
+} = Astro.props;
+
+// Dynamic component - must be capitalized
+const IconComponent = icon;
+
+// Load collection entries
+const entries = await getCollection(collection);
+
+// Sort by start date, most recent first
+const sortedEntries = entries.sort(
+  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime()
+);
+
+function formatPeriod(startDate: Date, endDate?: Date) {
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short",
+    year: "numeric",
+  };
+  const start = startDate.toLocaleDateString("en-US", options);
+  const end = endDate
+    ? endDate.toLocaleDateString("en-US", options)
+    : "Present";
+  return `${start} - ${end}`;
+}
+
+// Render markdown content for each entry
+const entriesWithContent = await Promise.all(
+  sortedEntries.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  })
+);
+---
+
+<section id={collection} class={`py-20 px-4 bg-${backgroundColor}`}>
+  <div class={`mx-auto ${variant === "timeline" ? "max-w-4xl" : "max-w-4xl"}`}>
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold">{sectionTitle}</h2>
+      {
+        sectionSubtitle && (
+          <p class="text-base-content/70 mt-2">{sectionSubtitle}</p>
+        )
+      }
+    </div>
+
+    {
+      variant === "timeline" ? (
+        <ul class="timeline timeline-vertical timeline-snap-icon">
+          {entriesWithContent.map(({ entry, Content }, index) => (
+            <li>
+              {index > 0 && <hr class="bg-base-100" />}
+              <div class="timeline-middle">
+                <IconComponent class={`size-5 text-${color} mx-3 my-1`} />
+              </div>
+              <div
+                class={`timeline-${index % 2 === 0 ? "start" : "end"} pt-3 mb-10`}
+              >
+                <time
+                  class={`font-mono text-sm text-base-content/70 block italic ${index % 2 === 0 ? "text-end" : ""}`}
+                >
+                  {formatPeriod(entry.data.startDate, entry.data.endDate)}
+                </time>
+                <div class="card bg-base-100 shadow-xl mt-2">
+                  <div class="card-body">
+                    <div class="flex items-center gap-4 mb-2">
+                      {entry.data.logo && (
+                        <div class="avatar">
+                          <div class="w-12 mask mask-squircle">
+                            <img src={entry.data.logo} alt={entry.data.title} />
+                          </div>
+                        </div>
+                      )}
+                      <div>
+                        <h3 class="card-title">{entry.data.title}</h3>
+                        <p class={`text-${color} font-semibold`}>
+                          {entry.data.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="prose prose-sm max-w-none text-base-content/80">
+                      <Content />
+                    </div>
+                    {entry.data.link && (
+                      <div class="card-actions justify-end mt-4">
+                        <a
+                          href={entry.data.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="link link-hover"
+                        >
+                          {collection === "work"
+                            ? "View Company"
+                            : "View Institution"}
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              {index < entriesWithContent.length - 1 && (
+                <hr class="bg-base-100" />
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul class="list bg-base-100 rounded-box shadow-lg">
+          {entriesWithContent.map(({ entry, Content }, index) => (
+            <li class="border-b hover:opacity-85 transition-opacity border-base-300 last:border-b-0">
+              <details class="collapse">
+                <summary class="collapse-title pe-5">
+                  <div class="list-row p-0 items-center after:hidden">
+                    <div>
+                      {entry.data.logo && (
+                        <div class="avatar">
+                          <div class="w-10 mask mask-squircle">
+                            <img src={entry.data.logo} alt={entry.data.title} />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <h3 class="font-bold text-lg">{entry.data.title}</h3>
+                      <p class={`text-${color} font-semibold text-sm`}>
+                        {entry.data.subtitle}
+                      </p>
+                    </div>
+
+                    <div class="text-sm text-base-content/70 font-mono whitespace-nowrap">
+                      {formatPeriod(entry.data.startDate, entry.data.endDate)}
+                    </div>
+                  </div>
+                </summary>
+
+                <div class="collapse-content">
+                  <div class="prose prose-sm max-w-none text-base-content/80">
+                    <Content />
+                  </div>
+                  {entry.data.link && (
+                    <div class="flex justify-end">
+                      <a
+                        href={entry.data.link}
+                        target="_blank"
+                        class="link link-hover"
+                      >
+                        {collection === "work"
+                          ? "View Company"
+                          : "View Institution"}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </details>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>

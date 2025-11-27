@@ -1,0 +1,560 @@
+---
+title: "Content Collections Guide"
+description: "Learn how to create and manage content in Bloomfolio using Astro's Content Collections. Complete schemas and examples for all 6 collection types."
+image: "../placeholder-blog.png"
+publishDate: "2025-11-02"
+tags: ["Guide", "Content", "Collections"]
+---
+
+## Understanding Astro Content Collections
+
+Content Collections are Astro's way of organizing and validating your content with TypeScript. Each collection has a defined schema that ensures your content has the required fields and correct data types.
+
+### Benefits
+
+- **Type Safety**: Catch errors before they reach production
+- **Auto-completion**: Get IntelliSense in your editor
+- **Validation**: Ensure content meets requirements
+- **Performance**: Optimized content loading
+- **Organization**: Clear structure for your content
+
+### Collection Locations
+
+All content lives in `src/content/` with each collection in its own folder:
+
+```
+src/content/
+├── about/        # Single about page
+├── blog/         # Blog posts (.md or .mdx)
+├── education/    # Education history
+├── hackathons/   # Hackathon entries
+├── projects/     # Portfolio projects
+└── work/         # Work experience
+```
+
+## Content Collection Schemas
+
+Each collection has a specific schema defined in `src/content.config.ts`. All content files must include frontmatter (YAML between `---` markers) that matches the schema.
+
+### About Collection
+
+**Purpose**: Your personal bio and introduction
+
+**File**: `src/content/about/about.md`
+
+**Schema**:
+```yaml
+---
+title: string              # Section title
+photo?: string            # Optional photo URL
+---
+```
+
+**Example**:
+```markdown
+---
+title: "About Me"
+photo: "https://example.com/photo.jpg"
+---
+
+I'm a passionate developer who loves building beautiful web experiences.
+I specialize in modern JavaScript frameworks and have a keen eye for design.
+
+## What I Do
+
+- Full-stack web development
+- UI/UX design
+- Open-source contributions
+
+## Interests
+
+When I'm not coding, you'll find me exploring new technologies, contributing
+to open source projects, or sharing knowledge through blog posts and talks.
+```
+
+**Tips**:
+- Use the photo field for a professional headshot or avatar
+- Write in first person for a personal touch
+- Include markdown formatting for better readability
+- Highlight your unique skills and interests
+
+---
+
+### Blog Collection
+
+**Purpose**: Articles, tutorials, and blog posts
+
+**Location**: `src/content/blog/*.{md,mdx}`
+
+**Schema**:
+```yaml
+---
+title: string                    # Post title
+description: string              # Brief summary (for SEO)
+image: image()                   # Featured image (relative path)
+publishDate: date                # Publication date
+updatedDate?: date              # Optional last update date
+tags?: string[]                 # Optional tags/categories
+---
+```
+
+**Example**:
+```markdown
+---
+title: "Building Modern Web Apps with Astro"
+description: "Learn how to create fast, content-focused websites using Astro's islands architecture."
+image: "./astro-tutorial.png"
+publishDate: "2024-01-15"
+updatedDate: "2024-01-20"
+tags: ["Astro", "Tutorial", "Web Development"]
+---
+
+# Building Modern Web Apps with Astro
+
+Astro is a revolutionary framework for building content-focused websites...
+
+## Why Astro?
+
+Astro brings several advantages to modern web development:
+- Zero JavaScript by default
+- Component islands architecture
+- Framework-agnostic components
+- Excellent performance
+
+## Getting Started
+
+Let's dive into creating your first Astro project...
+```
+
+**Image Paths**:
+- Use relative paths (`./image.png`) for images in the same folder as your markdown file
+- Images are automatically optimized by Astro
+- Supported formats: PNG, JPG, WEBP, AVIF, SVG
+
+**Best Practices**:
+- Write compelling titles that encourage clicks
+- Keep descriptions under 160 characters for SEO
+- Use 2-5 relevant tags per post
+- Include `updatedDate` when making significant changes
+- Optimize images before adding (aim for < 1MB)
+
+---
+
+### Projects Collection
+
+**Purpose**: Showcase your portfolio work
+
+**Location**: `src/content/projects/*.md`
+
+**Schema**:
+```yaml
+---
+title: string                    # Project name
+description: string              # Brief description
+image: image()                   # Project screenshot
+startDate: date                  # When you started
+endDate?: date                  # When finished (omit for ongoing)
+skills: string[]                # Technologies used
+demoLink?: string               # Optional demo URL
+sourceLink?: string             # Optional source code URL
+---
+```
+
+**Example**:
+```markdown
+---
+title: "E-Commerce Platform"
+description: "A full-stack e-commerce platform with React and Node.js"
+image: "./ecommerce-screenshot.png"
+startDate: "2023-01-15"
+endDate: "2023-06-30"
+skills: ["React", "Node.js", "PostgreSQL", "Stripe", "Tailwind CSS"]
+demoLink: "https://demo.myproject.com"
+sourceLink: "https://github.com/username/project"
+---
+
+## Overview
+
+Built a complete e-commerce solution with user authentication, product catalog,
+shopping cart, and payment processing.
+
+## Key Features
+
+- User authentication with JWT
+- Product search and filtering
+- Shopping cart with session persistence
+- Stripe payment integration
+- Admin dashboard for inventory management
+
+## Technical Implementation
+
+### Backend
+The backend is built with Node.js and Express, utilizing PostgreSQL for data
+persistence. User authentication is handled through JWT tokens with refresh
+token rotation for enhanced security.
+
+### Frontend
+React with TypeScript provides a type-safe development experience. State
+management is handled with Context API and custom hooks for cleaner code.
+
+## Challenges & Solutions
+
+The main challenge was implementing real-time inventory updates across
+multiple user sessions. I solved this by implementing WebSocket connections
+for live updates and optimistic UI updates for better user experience.
+
+## Results
+
+- 500+ active users within first month
+- 99.9% uptime
+- Average page load time < 2 seconds
+```
+
+**Tips for Great Project Descriptions**:
+- Start with a clear overview
+- Explain the problem you solved
+- Highlight technical challenges and solutions
+- Include measurable results when possible
+- Use headings to organize content
+- Add screenshots or demos if available
+
+**Skills Array**:
+- List technologies in order of prominence
+- Include frameworks, libraries, and tools
+- Be specific (e.g., "React 18" vs just "React")
+- Limit to 5-8 key technologies
+
+**Ongoing Projects**:
+- Omit `endDate` for projects still in development
+- The UI will automatically show "Present"
+
+---
+
+### Work Collection
+
+**Purpose**: Professional work experience
+
+**Location**: `src/content/work/*.md`
+
+**Schema**:
+```yaml
+---
+title: string                    # Company name
+subtitle: string                 # Job title/position
+startDate: date                  # Start date
+endDate?: date                  # End date (omit for current position)
+logo?: string                   # Optional company logo URL
+link?: string                   # Optional company website
+---
+```
+
+**Example**:
+```markdown
+---
+title: "Tech Innovations Inc."
+subtitle: "Senior Full-Stack Developer"
+startDate: "2020-03-01"
+endDate: "2023-08-15"
+logo: "https://company.com/logo.png"
+link: "https://techinnovations.com"
+---
+
+Led development of customer-facing web applications serving 100K+ daily users.
+
+## Responsibilities
+
+- Architected and implemented scalable microservices using Node.js and Docker
+- Mentored team of 3 junior developers through code reviews and pair programming
+- Collaborated with product and design teams to deliver user-centric features
+
+## Key Achievements
+
+- **Performance**: Reduced application load time by 60% through code optimization and lazy loading
+- **CI/CD**: Implemented automated deployment pipeline reducing release time from 2 hours to 15 minutes
+- **Code Quality**: Increased test coverage from 45% to 85% across the codebase
+- **Leadership**: Successfully onboarded and mentored 3 junior developers
+
+## Technologies Used
+
+React, TypeScript, Node.js, PostgreSQL, Redis, Docker, AWS, GitHub Actions
+```
+
+**Current Position**:
+- Omit `endDate` field entirely for your current job
+- The timeline will automatically display "Present"
+
+**Logo Guidelines**:
+- Use company's official logo
+- Host on CDN or use company website URL
+- Square format works best (will be displayed as circle)
+- Recommended size: 200x200px minimum
+
+**Writing Tips**:
+- Use action verbs (Led, Implemented, Architected)
+- Quantify achievements with numbers when possible
+- Focus on impact, not just responsibilities
+- Highlight technical growth and leadership
+
+---
+
+### Education Collection
+
+**Purpose**: Academic background and certifications
+
+**Location**: `src/content/education/*.md`
+
+**Schema**: Same as Work Collection
+
+```yaml
+---
+title: string                    # Institution name
+subtitle: string                 # Degree/course name
+startDate: date                  # Start date
+endDate?: date                  # Graduation date
+logo?: string                   # Optional institution logo
+link?: string                   # Optional institution website
+---
+```
+
+**Example**:
+```markdown
+---
+title: "University of Technology"
+subtitle: "Bachelor of Science in Computer Science"
+startDate: "2016-09-01"
+endDate: "2020-06-15"
+logo: "https://university.edu/logo.png"
+link: "https://university.edu"
+---
+
+Graduated with honors. GPA: 3.8/4.0
+
+## Relevant Coursework
+
+- Data Structures & Algorithms
+- Web Development & Modern Frameworks
+- Database Systems & Design
+- Software Engineering Principles
+- Machine Learning Fundamentals
+- Computer Networks
+
+## Academic Achievements
+
+- Dean's List (2017-2020)
+- CS Department Scholarship Recipient
+- Senior Capstone Project: AI-powered code review tool
+
+## Extracurricular Activities
+
+- President of Computer Science Club (2019-2020)
+- Hackathon organizer and participant
+- Teaching assistant for Introduction to Programming
+```
+
+**Including Certifications**:
+
+You can also use the education collection for professional certifications:
+
+```markdown
+---
+title: "AWS"
+subtitle: "AWS Certified Solutions Architect"
+startDate: "2023-06-01"
+endDate: "2026-06-01"  # Expiration date
+logo: "https://aws.amazon.com/certification/certification-prep/logo.png"
+link: "https://aws.amazon.com/certification/"
+---
+
+Validated expertise in designing distributed systems on AWS.
+
+## Skills Validated
+
+- Designing resilient architectures
+- High-performing architectures
+- Secure applications and architectures
+- Cost-optimized architectures
+```
+
+---
+
+### Hackathons Collection
+
+**Purpose**: Hackathon participation and projects
+
+**Location**: `src/content/hackathons/*.md`
+
+**Schema**:
+```yaml
+---
+title: string                    # Hackathon name
+location: string                 # City, Country or "Virtual"
+description: string              # Brief description
+startDate: date                  # Start date
+endDate?: date                  # End date (for multi-day events)
+logo?: string                   # Optional hackathon logo
+sourceLink?: string             # Optional project repository
+---
+```
+
+**Example**:
+```markdown
+---
+title: "TechCrunch Disrupt Hackathon"
+location: "San Francisco, CA"
+description: "Built an AI-powered code review assistant in 48 hours"
+startDate: "2023-09-15"
+endDate: "2023-09-17"
+logo: "https://techcrunch.com/hackathon-logo.png"
+sourceLink: "https://github.com/username/hackathon-project"
+---
+
+## Project: CodeReview AI
+
+Created an intelligent code review assistant that provides context-aware
+suggestions and identifies potential bugs using GPT-4 and static analysis.
+
+## What We Built
+
+- VS Code extension for real-time code analysis
+- Machine learning model trained on 10K+ code reviews
+- Natural language explanations for suggestions
+- Integration with GitHub Pull Requests
+
+## Tech Stack
+
+- Frontend: React, TypeScript
+- Backend: Python, FastAPI
+- AI: OpenAI GPT-4 API
+- Infrastructure: Docker, AWS Lambda
+
+## Team
+
+- 4 developers
+- 1 designer
+- 48 hours total
+
+## Outcome
+
+**🏆 Won 2nd place** out of 150 competing teams
+
+## What I Learned
+
+- Rapid prototyping under time constraints
+- Effective team collaboration and task delegation
+- API integration and prompt engineering for LLMs
+- Presentation skills for technical demos
+```
+
+**Tips for Hackathon Entries**:
+- Clearly describe what you built and why
+- Highlight your specific contributions
+- Include team size and collaboration aspects
+- Mention any awards or recognition
+- Link to demo video if available
+- Explain what you learned from the experience
+
+**Virtual Hackathons**:
+```yaml
+location: "Virtual"  # For online hackathons
+```
+
+---
+
+## Best Practices
+
+### File Naming
+
+Use descriptive, URL-friendly names:
+
+**Good**:
+- `building-modern-web-apps.md`
+- `react-performance-tips.mdx`
+- `ecommerce-platform.md`
+
+**Avoid**:
+- `post1.md` (not descriptive)
+- `New Project.md` (spaces)
+- `article_2024.md` (underscores)
+
+### Date Formatting
+
+Always use ISO 8601 format: `YYYY-MM-DD`
+
+```yaml
+publishDate: "2024-01-25"
+startDate: "2023-06-15"
+```
+
+### Consistent Frontmatter
+
+- Always include all required fields
+- Use consistent date formats
+- Write clear, concise descriptions
+- Choose relevant, searchable tags
+- Provide meaningful titles
+
+### Image Organization
+
+Keep images organized in the same folder as content:
+
+```
+src/content/blog/
+├── my-first-post.md
+├── my-first-post-hero.png
+├── my-first-post-diagram.png
+└── another-post.md
+```
+
+Reference with relative paths:
+```yaml
+image: "./my-first-post-hero.png"
+```
+
+### Content Quality
+
+1. **Proofread**: Check for typos and grammar
+2. **Structure**: Use clear headings and sections
+3. **Brevity**: Be concise but thorough
+4. **Examples**: Include code examples when relevant
+5. **Links**: Verify all links work correctly
+
+## Troubleshooting
+
+### Frontmatter Validation Errors
+
+**Error**: "Required property missing"
+- Check `src/content.config.ts` for required fields
+- Ensure all required fields are present in frontmatter
+- Verify field names match exactly (case-sensitive)
+
+**Error**: "Invalid date format"
+- Use ISO format: `YYYY-MM-DD`
+- Ensure dates are quoted: `"2024-01-25"`
+- Check for typos in dates
+
+### Images Not Loading
+
+1. **Check path**: Ensure path is correct relative to markdown file
+2. **File extension**: Include extension (.png, .jpg, etc.)
+3. **Case sensitivity**: Match exact case of filename
+4. **Build cache**: Try deleting `dist/` and rebuilding
+
+### Type Errors
+
+If TypeScript shows errors in content:
+- Run `npm run astro check` to see detailed errors
+- Verify schema matches your frontmatter
+- Check that array fields use proper syntax: `["item1", "item2"]`
+
+## Next Steps
+
+Now that you understand content collections:
+
+1. **Start Creating**: Add your projects, work experience, and education
+2. **Write Blog Posts**: Share your knowledge and experiences
+3. **Optimize Images**: Use compressed, optimized images
+4. **Check the [Markdown Guide](/blog/guides/markdown-guide)**: Learn markdown syntax and formatting
+
+For setup and configuration, see the [Bloomfolio Complete Guide](/blog/guides/bloomfolio-complete-guide).
+
+Happy creating! 🌼

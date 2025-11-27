@@ -1,0 +1,566 @@
+---
+title: "Bloomfolio Complete Guide: Building Your Portfolio"
+description: "A comprehensive guide to customizing and deploying your Bloomfolio portfolio template. Learn about configuration, components, content collections, and deployment."
+image: "../placeholder-blog.png"
+publishDate: "2025-11-01"
+tags: ["Guide", "Documentation", "Astro", "Portfolio"]
+---
+
+## Introduction
+
+Bloomfolio is a configuration-driven portfolio template designed for developers, designers, and creatives. It combines the power of Astro's static site generation with the flexibility of Tailwind CSS and the beautiful components of DaisyUI.
+
+### Key Features
+
+- **Configuration-Driven**: Customize your portfolio through a central config file
+- **6 Content Collections**: Blog, Projects, Work, Education, Hackathons, and About
+- **Type-Safe**: Full TypeScript support for content and configuration
+- **Modern Stack**: [Astro 5](https://astro.build/) + [TailwindCSS 4](https://tailwindcss.com/docs/installation/using-vite) + [DaisyUI 5](https://daisyui.com/)
+- **MDX Support**: Enhanced markdown with component imports
+- **6 Built-in Themes**: Light, Dark, Synthwave, Retro, Valentine, Dim
+- **Responsive Design**: Mobile-first approach with DaisyUI components
+- **View Transitions**: Smooth page transitions with Astro's View Transitions API
+- **FAB Flower**: Expandable floating action button for extra links
+- **Image Optimization**: Automatic image optimization with Astro
+
+## Tech Stack
+
+### Core Technologies
+
+- **[Astro 5](https://astro.build/)**: Modern static site generator with component islands
+- **[TailwindCSS 4](https://tailwindcss.com/docs/installation/using-vite)**: Utility-first CSS framework with CSS-first configuration
+- **[DaisyUI 5](https://daisyui.com/)**: Tailwind CSS component library
+- **TypeScript**: Type-safe development experience
+- **MDX**: Markdown with JSX support
+- **[Lucide Icons](https://lucide.dev/)**: Beautiful, consistent icon library
+
+### Integrations
+
+- **@astrojs/mdx**: MDX integration for enhanced content
+- **@tailwindcss/vite**: Tailwind CSS 4 Vite plugin
+- **View Transitions API**: Smooth page transitions
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+ or 20+
+- npm, pnpm, or yarn package manager
+- Code editor (VS Code recommended)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/lauroguedes/bloomfolio.git
+
+# Navigate to project directory
+cd bloomfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Visit `http://localhost:4321` to see your portfolio.
+
+## Project Structure
+
+```
+bloomfolio/
+├── public/              # Static assets
+│   └── favicon.svg
+├── src/
+│   ├── assets/         # Image assets
+│   │   └── bloomfolio.png
+│   ├── components/     # Reusable components (20+)
+│   │   ├── About.astro
+│   │   ├── Blog.astro
+│   │   ├── BlogCard.astro
+│   │   ├── Contact.astro
+│   │   ├── FabFlower.astro
+│   │   ├── Hackathons.astro
+│   │   ├── Hero.astro
+│   │   ├── ProjectCard.astro
+│   │   ├── Projects.astro
+│   │   ├── SkillBadge.astro
+│   │   ├── ThemeSelector.astro
+│   │   ├── ThemeToggle.astro
+│   │   ├── Timeline.astro
+│   │   ├── Spotify.astro
+│   │   ├── Twitter.astro
+│   │   └── YouTube.astro
+│   ├── content/        # Content collections
+│   │   ├── about/     # About section
+│   │   ├── blog/      # Blog posts
+│   │   ├── education/ # Education history
+│   │   ├── hackathons/# Hackathon entries
+│   │   ├── projects/  # Portfolio projects
+│   │   └── work/      # Work experience
+│   ├── layouts/       # Page layouts
+│   │   ├── Layout.astro
+│   │   ├── BlogLayout.astro
+│   │   └── ProjectLayout.astro
+│   ├── pages/         # File-based routing
+│   │   ├── index.astro
+│   │   ├── blog/
+│   │   └── projects/
+│   ├── styles/
+│   │   └── global.css # Tailwind + DaisyUI
+│   ├── config.ts      # Site configuration
+│   └── content.config.ts # Content schemas
+├── astro.config.mjs   # Astro configuration
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+## Configuration Guide
+
+All site configuration is centralized in `src/config.ts`. This file controls your site's metadata, social links, theme settings, section visibility, and more.
+
+### Basic Information
+
+```typescript
+export const siteConfig: SiteConfig = {
+  name: "Your Name",
+  title: "Your Title/Tagline",
+  description: "Brief description of your portfolio",
+  avatar: "../assets/your-avatar.png",
+  location: "Your City, Country",
+  email: "your@email.com",
+  // ... more config
+};
+```
+
+### Social Links
+
+Add your social media profiles:
+
+```typescript
+socialLinks: {
+  github: "https://github.com/username",
+  linkedin: "https://linkedin.com/in/username",
+  twitter: "https://twitter.com/username",
+  bluesky: "https://bsky.app/profile/username",
+  instagram: "https://instagram.com/username",
+  youTube: "https://youtube.com/@username",
+  codetips: "https://codetips.cloud/u/username",
+}
+```
+
+All fields are optional - only include the platforms you use.
+
+### Theme Settings
+
+Choose between theme selector (dropdown) or theme toggle (checkbox):
+
+```typescript
+enableThemeSelector: true  // true = dropdown, false = checkbox
+```
+
+Available themes:
+- `light` - Clean light theme (default)
+- `dark` - Dark theme
+- `synthwave` - Retro cyberpunk
+- `retro` - Vintage computing
+- `valentine` - Warm pink tones
+- `dim` - Dimmed dark theme
+
+### Section Visibility
+
+Control which sections appear on your homepage:
+
+```typescript
+sections: {
+  about: true,      // About section
+  projects: true,   // Projects showcase
+  blog: true,       // Latest blog posts
+  work: true,       // Work experience
+  education: true,  // Education history
+  hackathons: true, // Hackathon participation
+  contact: true,    // Contact section
+}
+```
+
+Set any section to `false` to hide it. The Hero section is always visible.
+
+### Extra Links (FAB Flower)
+
+Configure the floating action button menu:
+
+```typescript
+extraLinks: {
+  enable: true,
+  links: [
+    {
+      link: "/blog/guide",
+      icon: BookOpen,
+      label: "Guide"
+    },
+    // Add more links...
+  ],
+}
+```
+
+Set `enable: false` to hide the FAB entirely.
+
+## Content Collections
+
+Bloomfolio uses Astro's Content Collections for type-safe content management. There are 6 collections:
+
+### 1. About Collection
+
+Single entry describing who you are.
+
+**Location**: `src/content/about/about.md`
+
+```markdown
+---
+title: "About Me"
+photo: "https://your-photo-url.com/photo.jpg"
+---
+
+Write your bio here using Markdown...
+```
+
+### 2. Blog Collection
+
+Blog posts support both `.md` and `.mdx` formats.
+
+**Location**: `src/content/blog/*.{md,mdx}`
+
+```markdown
+---
+title: "Post Title"
+description: "Brief description"
+image: "./featured-image.png"
+publishDate: "2024-01-25"
+updatedDate: "2024-01-26"  # Optional
+tags: ["Tag1", "Tag2"]      # Optional
+---
+
+Your blog post content...
+```
+
+### 3. Projects Collection
+
+Showcase your work and projects.
+
+**Location**: `src/content/projects/*.md`
+
+```markdown
+---
+title: "Project Name"
+description: "Brief description"
+image: "./project-screenshot.png"
+startDate: "2023-01-15"
+endDate: "2023-06-30"      # Optional (omit for ongoing)
+skills: ["React", "TypeScript", "Node.js"]
+demoLink: "https://demo.example.com"    # Optional
+sourceLink: "https://github.com/..."    # Optional
+---
+
+Detailed project description...
+```
+
+### 4. Work Collection
+
+Professional experience timeline.
+
+**Location**: `src/content/work/*.md`
+
+```markdown
+---
+title: "Company Name"
+subtitle: "Job Title"
+startDate: "2020-01-15"
+endDate: "2023-06-30"      # Optional (omit for current role)
+logo: "https://company-logo-url.com"  # Optional
+link: "https://company-website.com"   # Optional
+---
+
+Job description and achievements...
+```
+
+### 5. Education Collection
+
+Academic background.
+
+**Location**: `src/content/education/*.md`
+
+```markdown
+---
+title: "University Name"
+subtitle: "Degree/Course Name"
+startDate: "2016-09-01"
+endDate: "2020-06-15"      # Optional
+logo: "https://university-logo.com"  # Optional
+link: "https://university-website.com"  # Optional
+---
+
+Additional education details...
+```
+
+### 6. Hackathons Collection
+
+Hackathon participation and wins.
+
+**Location**: `src/content/hackathons/*.md`
+
+```markdown
+---
+title: "Hackathon Name"
+location: "City, Country"
+description: "Brief description"
+startDate: "2023-11-23"
+endDate: "2023-11-25"      # Optional
+logo: "https://hackathon-logo.com"  # Optional
+sourceLink: "https://github.com/project"  # Optional
+---
+
+Project details and achievements...
+```
+
+## Components Reference
+
+### Layout Components
+
+#### Layout.astro
+Base layout for all pages. Includes:
+- Global styles
+- Theme controls
+- Page transitions
+- Meta tags
+- FAB Flower (if enabled)
+
+#### BlogLayout.astro
+Specialized layout for blog posts with:
+- Featured image
+- Post metadata (date, reading time)
+- Tags display
+- Navigation buttons
+
+#### ProjectLayout.astro
+Project detail page layout with custom styling.
+
+### Section Components
+
+#### Hero.astro
+Main hero section with:
+- Avatar/logo
+- Name and title
+- Description
+- Location
+- Social media links
+
+#### About.astro
+About section displaying bio with optional photo.
+
+#### Projects.astro
+Projects showcase section showing all projects in a grid.
+
+#### Blog.astro
+Latest blog posts section (shows 3 most recent).
+
+#### Timeline.astro
+Versatile component for Work and Education sections.
+
+**Variants**:
+- `timeline`: Visual timeline with icons
+- `list`: Clean list view
+
+**Props**:
+```typescript
+{
+  collection: "work" | "education"
+  variant: "timeline" | "list"
+  color: "primary" | "secondary" | "accent"
+  backgroundColor?: "base-200" | "base-300"
+  icon: LucideIcon
+  sectionTitle: string
+}
+```
+
+#### Hackathons.astro
+Display hackathon participation with cards.
+
+#### Contact.astro
+Contact section with email display.
+
+### Card Components
+
+#### ProjectCard.astro
+Individual project card with:
+- Project image
+- Title and description
+- Date period
+- Skills badges
+- Action buttons (Demo, Source, View)
+
+#### BlogCard.astro
+Blog post card with:
+- Image overlay effect
+- Title and description
+- Publish date
+- Clickable to full post
+
+### Utility Components
+
+#### SkillBadge.astro
+Displays skill/tag badges with consistent styling.
+
+#### ThemeSelector.astro
+Dropdown menu for theme selection (6 themes).
+
+#### ThemeToggle.astro
+Simple checkbox for light/dark toggle.
+
+#### FabFlower.astro
+Floating action button with expandable link menu.
+
+### Media Components
+
+#### Spotify.astro
+Embed Spotify tracks, albums, or playlists.
+
+```jsx
+<Spotify url="https://open.spotify.com/track/..." />
+```
+
+#### YouTube.astro
+Embed YouTube videos.
+
+```jsx
+<YouTube id="video-id" />
+<!-- OR -->
+<YouTube url="https://youtube.com/watch?v=..." />
+```
+
+#### Twitter.astro
+Embed tweets.
+
+```jsx
+<Twitter url="https://twitter.com/user/status/..." />
+<!-- OR -->
+<Twitter id="tweet-id" username="username" />
+```
+
+## Styling System
+
+### Tailwind CSS 4
+
+Bloomfolio uses Tailwind CSS 4 with the new CSS-first configuration approach. Global styles are defined in `src/styles/global.css`:
+
+```css
+@import "tailwindcss";
+@plugin "daisyui";
+```
+
+### DaisyUI Components
+
+DaisyUI components are available throughout the project:
+- Cards
+- Buttons
+- Badges
+- Timelines
+- Dividers
+- And more...
+
+### Custom Styling
+
+Add component-scoped styles using `<style>` tags in `.astro` files:
+
+```astro
+<div class="custom-class">Content</div>
+
+<style>
+  .custom-class {
+    /* Your styles */
+  }
+</style>
+```
+
+## Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+Output is generated in the `dist/` directory.
+
+### Preview Build
+
+```bash
+npm run preview
+```
+
+### Deployment Platforms
+
+#### Vercel
+1. Connect your GitHub repository
+2. Vercel auto-detects Astro
+3. Deploy!
+
+#### Netlify
+1. Connect repository
+2. Build command: `npm run build`
+3. Publish directory: `dist`
+
+#### Cloudflare Pages
+1. Connect repository
+2. Build command: `npm run build`
+3. Build output directory: `dist`
+
+#### GitHub Pages
+1. Use GitHub Actions
+2. Configure Astro for GitHub Pages
+3. Push to deploy
+
+## Troubleshooting
+
+### Images not loading
+- Ensure images are in `src/assets/` or use proper URLs
+- Use `image()` helper in frontmatter for relative paths
+- Check image paths are correct
+
+### Theme not changing
+- Clear browser cache
+- Check localStorage is enabled
+- Verify theme names match DaisyUI themes
+
+### Build errors
+- Run `npm install` to ensure all dependencies are installed
+- Check TypeScript errors with `npm run astro check`
+- Verify all content frontmatter matches schemas
+
+### Content not appearing
+- Check collection name matches folder name
+- Verify frontmatter schema is correct
+- Ensure files have `.md` or `.mdx` extension
+
+## Tips & Best Practices
+
+1. **Keep config.ts updated**: This is your central control panel
+2. **Use type-safe content**: Let TypeScript catch errors early
+3. **Optimize images**: Keep images under 1MB for best performance
+4. **Write meaningful descriptions**: Helps with SEO
+5. **Test on mobile**: Use responsive design utilities
+6. **Use consistent dates**: ISO format `YYYY-MM-DD` works best
+7. **Leverage MDX**: Import components for rich content
+8. **Commit regularly**: Use git to track changes
+9. **Preview before deploy**: Always test builds locally
+
+## Next Steps
+
+- Check out the [Markdown & Content Guide](/blog/markdown-and-content-guide) for detailed content creation instructions
+- Customize your theme colors in `global.css`
+- Add more projects to showcase your work
+- Write blog posts to share your knowledge
+- Deploy your portfolio to your preferred platform
+
+Happy building with Bloomfolio! 🌼

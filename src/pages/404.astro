@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { House, FolderOpen } from "@lucide/astro";
+---
+
+<Layout
+    title="404 - Page Not Found"
+    description="The page you're looking for doesn't exist."
+>
+    <div class="min-h-screen flex items-center justify-center px-4 py-20">
+        <div class="text-center max-w-2xl mx-auto">
+            <!-- Large 404 Number -->
+            <h1 class="text-9xl font-bold text-primary mb-4 animate-pulse">
+                404
+            </h1>
+
+            <!-- Error Title -->
+            <h2 class="text-4xl font-bold mb-4">😵 Page Not Found</h2>
+
+            <!-- Error Description -->
+            <p class="text-xl mb-8 text-base-content/70">
+                Oops! The page you're looking for doesn't exist or has been
+                moved. Let's get you back on track.
+            </p>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-4 justify-center flex-wrap mt-8">
+                <a href="/" class="btn btn-primary gap-2">
+                    <House class="size-5" />
+                    Go Home
+                </a>
+                <a href="/projects" class="btn btn-outline gap-2">
+                    <FolderOpen class="size-5" />
+                    View Projects
+                </a>
+            </div>
+
+            <!-- Helpful Links -->
+            <!-- <div class="flex justify-center gap-2 mt-12">
+                <p class="text-sm text-base-content/60 mb-4">
+                    You might be looking for:
+                </p>
+                <div class="flex gap-3 justify-center flex-wrap text-sm">
+                    <a href="/blog" class="link link-hover">Blog</a>
+                    <span class="text-base-content/30">•</span>
+                    <a href="/#about" class="link link-hover">About</a>
+                    <span class="text-base-content/30">•</span>
+                    <a
+                        href="/blog/guides/bloomfolio-complete-guide"
+                        class="link link-hover">Documentation</a
+                    >
+                </div>
+            </div> -->
+        </div>
+    </div>
+</Layout>

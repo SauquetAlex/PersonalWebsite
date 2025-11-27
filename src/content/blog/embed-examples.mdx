@@ -1,0 +1,77 @@
+---
+title: "Rich Media Embeds in MDX"
+description: "Learn how to embed Spotify, YouTube, and Twitter content directly in your blog posts using MDX components."
+image: "./placeholder-blog.png"
+publishDate: "2024-10-31"
+tags: ["MDX", "Tutorial", "Media Embeds"]
+---
+
+import Spotify from '../../components/Spotify.astro';
+import YouTube from '../../components/YouTube.astro';
+import Twitter from '../../components/Twitter.astro';
+
+## Spotify Embeds
+
+You can embed any Spotify content - tracks, albums, playlists, or podcasts. Here's an example of a Spotify track:
+
+<Spotify url="https://open.spotify.com/track/0y5unxPEvpulXKPgw4StQW?si=b9c1f1b16f3540ac" />
+
+Simply use the `<Spotify>` component with the Spotify URL:
+
+```jsx
+<Spotify url="https://open.spotify.com/track/0y5unxPEvpulXKPgw4StQW?si=b9c1f1b16f3540ac" />
+```
+
+## YouTube Embeds
+
+Embed YouTube videos using either the video ID or the full URL. Both approaches work:
+
+### Using Video ID
+
+<YouTube id="qza5nDCSJTc" />
+
+```jsx
+<YouTube id="qza5nDCSJTc" />
+```
+
+### Using Full URL
+
+<YouTube url="https://youtu.be/YuG4-lewUTs?si=ZJrcuxpBoU9ayDG0" />
+
+```jsx
+<YouTube url="https://youtu.be/YuG4-lewUTs?si=ZJrcuxpBoU9ayDG0" />
+```
+
+## Twitter/X Embeds
+
+Embed tweets using either the tweet ID and username, or the full tweet URL:
+
+### Using Full URL (Recommended)
+
+<Twitter url="https://x.com/leowg/status/1983085626690838835" />
+
+```jsx
+<Twitter url="https://x.com/leowg/status/1983085626690838835" />
+```
+
+### Using ID and Username
+
+<Twitter id="1979523555885793745" username="leowg" />
+
+```jsx
+<Twitter id="1979523555885793745" username="leowg" />
+```
+
+## Flexibility
+
+All components are designed to be flexible:
+
+- **Spotify**: Accepts any Spotify URL (automatically converts to embed URL)
+- **YouTube**: Accepts either `id` or `url` prop
+- **Twitter**: Accepts either `url` or both `id` and `username` props
+
+This makes it easy to quickly embed content without worrying about URL formats!
+
+## Conclusion
+
+With these custom MDX components, you can create rich, engaging blog posts that include multimedia content from your favorite platforms. Try them out in your next blog post!

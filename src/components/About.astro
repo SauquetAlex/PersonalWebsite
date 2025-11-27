@@ -1,0 +1,42 @@
+---
+import { Plus } from "@lucide/astro";
+
+interface Props {
+  title: string;
+  photo?: string;
+  Content: any;
+}
+
+const { title, photo, Content } = Astro.props;
+---
+
+<section id="about" class="py-20 px-4">
+  <div class="max-w-4xl mx-auto">
+    <div class="card card-side bg-base-200 shadow-sm">
+      {
+        photo && (
+          <figure class="shrink-0 w-48">
+            <img src={photo} alt={title} />
+          </figure>
+        )
+      }
+      <div class="card-body">
+        <h2 class="card-title text-2xl">{title}</h2>
+        <p class="text-lg">
+          <Content />
+        </p>
+        <div class="card-actions justify-end">
+          <div class="tooltip" data-tip="More about me">
+            <a
+              href="https://linkedin.com/in/lauroguedes"
+              target="_blank"
+              class="btn btn-primary"
+            >
+              <Plus class="size-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

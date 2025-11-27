@@ -1,0 +1,38 @@
+---
+import { Link } from "@lucide/astro";
+import type { ExtraLinks } from "../config";
+
+interface Props {
+  extraLinks: ExtraLinks;
+}
+
+const { extraLinks } = Astro.props;
+---
+
+<div class="fab fab-flower">
+  <!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
+  <div class="tooltip tooltip-top" data-tip="More links">
+    <div tabindex="0" role="button" class="btn btn-lg btn-accent btn-circle">
+      <Link class="size-6" />
+    </div>
+  </div>
+
+  <!-- Main Action button replaces the original button when FAB is open -->
+  <div class="fab-close">
+    Close <span class="btn btn-circle btn-lg btn-error">✕</span>
+  </div>
+
+  <!-- buttons that show up when FAB is open -->
+  {
+    extraLinks.links.map((link) => {
+      const IconComponent = link.icon;
+      return (
+        <div class="tooltip tooltip-left" data-tip={link.label}>
+          <a href={link.link} class="btn btn-lg btn-circle">
+            <IconComponent class="size-5" />
+          </a>
+        </div>
+      );
+    })
+  }
+</div>
