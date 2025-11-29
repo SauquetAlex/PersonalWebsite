@@ -5,6 +5,7 @@ interface Props {
   collection: "work" | "education";
   variant: "timeline" | "list";
   color?: string;
+  color_2?: string;
   backgroundColor?: string;
   icon: any; // Pass the icon component directly
   sectionTitle: string;
@@ -15,6 +16,7 @@ const {
   collection,
   variant,
   color = "primary",
+  color_2 = "secondary",
   backgroundColor = "base-200",
   icon,
   sectionTitle,

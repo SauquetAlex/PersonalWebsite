@@ -4,7 +4,7 @@ description: "A Julia implementation of a primal-dual central path following alg
 image: "https://api.dicebear.com/9.x/shapes/svg?seed=IPLP"
 startDate: "2025-03-31"
 endDate: "2025-05-02"
-skills: ["Julia", "Optimization", "Linear Programming", "Numerical Methods", "Sparse Matrices"]
+skills: ["Julia", "Optimization", "Linear Programming", "Numerical Methods"]
 sourceLink: "https://github.com/SauquetAlex/primal-dual-interior-point-linear-program-solver"
 ---
 
