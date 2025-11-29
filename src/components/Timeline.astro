@@ -7,7 +7,7 @@ interface Props {
   color?: string;
   color_2?: string;
   backgroundColor?: string;
-  icon: any; // Pass the icon component directly
+  icon: any;
   sectionTitle: string;
   sectionSubtitle?: string;
 }
@@ -23,13 +23,10 @@ const {
   sectionSubtitle,
 } = Astro.props;
 
-// Dynamic component - must be capitalized
 const IconComponent = icon;
 
-// Load collection entries
 const entries = await getCollection(collection);
 
-// Sort by start date, most recent first
 const sortedEntries = entries.sort(
   (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime()
 );
@@ -46,7 +43,6 @@ function formatPeriod(startDate: Date, endDate?: Date) {
   return `${start} - ${end}`;
 }
 
-// Render markdown content for each entry
 const entriesWithContent = await Promise.all(
   sortedEntries.map(async (entry) => {
     const { Content } = await render(entry);
@@ -54,6 +50,27 @@ const entriesWithContent = await Promise.all(
   })
 );
 ---
+
+<style>
+  /* Mobile: make all cards span full width across all columns */
+  @media (max-width: 767px) {
+    /* Make timeline-start span all columns */
+    .timeline > li > .timeline-start {
+      grid-column: 1 / -1 !important;
+      justify-self: stretch !important;
+    }
+    /* Make timeline-end span all columns */
+    .timeline > li > .timeline-end {
+      grid-column: 1 / -1 !important;
+      justify-self: stretch !important;
+    }
+    /* Right-align all dates */
+    .timeline > li > .timeline-start > time,
+    .timeline > li > .timeline-end > time {
+      text-align: right !important;
+    }
+  }
+</style>
 
 <section id={collection} class={`py-20 px-4 bg-${backgroundColor}`}>
   <div class={`mx-auto ${variant === "timeline" ? "max-w-4xl" : "max-w-4xl"}`}>
@@ -75,6 +92,10 @@ const entriesWithContent = await Promise.all(
               <div class="timeline-middle">
                 <IconComponent class={`size-5 text-${color} mx-3 my-1`} />
               </div>
+              {/*
+                Mobile: all cards on right (timeline-end)
+                Desktop: alternate left/right (md:timeline-start for even items)
+              */}
               <div
                 class={`timeline-${index % 2 === 0 ? "start" : "end"} pt-3 mb-10`}
               >
@@ -86,18 +107,15 @@ const entriesWithContent = await Promise.all(
                 <div class="card bg-base-100 shadow-xl mt-2">
                   <div class="card-body">
                     <div class="flex items-center gap-4 mb-2">
-                      <!-- {entry.data.logo && (
-                        <div class="avatar">
-                          <div class="w-12 mask mask-squircle">
-                            <img src={entry.data.logo} alt={entry.data.title} />
-                          </div>
-                        </div>
-                      )} -->
                       {entry.data.logo && (
                         <div class="avatar">
-                            <div class={`w-12 rounded-xl ring-2 ring-${color}`}>
-                              <img class="rounded-xl" src={entry.data.logo} alt={entry.data.title} />
-                            </div>
+                          <div class={`w-12 rounded-xl ring-2 ring-${color}`}>
+                            <img
+                              class="rounded-xl"
+                              src={entry.data.logo}
+                              alt={entry.data.title}
+                            />
+                          </div>
                         </div>
                       )}
                       <div>
@@ -149,20 +167,17 @@ const entriesWithContent = await Promise.all(
                         </div>
                       )}
                     </div>
-
                     <div>
                       <h3 class="font-bold text-lg">{entry.data.title}</h3>
                       <p class={`text-${color} font-semibold text-sm`}>
                         {entry.data.subtitle}
                       </p>
                     </div>
-
                     <div class="text-sm text-base-content/70 font-mono whitespace-nowrap">
                       {formatPeriod(entry.data.startDate, entry.data.endDate)}
                     </div>
                   </div>
                 </summary>
-
                 <div class="collapse-content">
                   <div class="prose prose-sm max-w-none text-base-content/80">
                     <Content />
