@@ -265,6 +265,25 @@ function calculateDuration(startDate: Date, endDate?: Date) {
     font-family: ui-monospace, monospace;
   }
 
+  /* Don't style code inside KaTeX */
+  .prose-content .katex code {
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    font-family: inherit;
+    background: transparent;
+  }
+
+  /* KaTeX display styling */
+  .prose-content .katex {
+    font-size: inherit;
+  }
+
+  .prose-content .katex-display {
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
   .prose-content pre {
     padding: 1rem;
     border-radius: 0.5rem;
@@ -292,4 +311,46 @@ function calculateDuration(startDate: Date, endDate?: Date) {
   .prose-content strong {
     font-weight: 600;
   }
+
+  /* Table styling */
+  .prose-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-base-content);
+  }
+
+  .prose-content table thead {
+    background-color: hsl(var(--b2));
+    border-bottom: 2px solid var(--color-base-content);
+  }
+
+  .prose-content table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .prose-content table td {
+    padding: 0.75rem 1rem;
+  }
+
+  .prose-content table tbody tr:hover {
+    background-color: hsl(var(--b2) / 0.5);
+  }
+
+  /* Make table scrollable on small screens */
+  @media (max-width: 768px) {
+    .prose-content table {
+      font-size: 0.875rem;
+    }
+    .prose-content table th,
+    .prose-content table td {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
 </style>

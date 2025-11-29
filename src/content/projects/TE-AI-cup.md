@@ -1,7 +1,7 @@
 ---
 title: "TE Connectivity AI Cup Winner"
 description: "A diffusion model for manufacturing action segmentation achieving 88.7% accuracy. Implemented YOLO-based hand detection with automatic task labeling for pipeline generalization across multiple production lines."
-image: "https://api.dicebear.com/9.x/glass/svg?seed=TEAI"
+image: "https://api.dicebear.com/9.x/shapes/svg?seed=TEAICup"
 startDate: "2023-10-17"
 endDate: "2024-05-10"
 skills: ["PyTorch", "Python", "YOLO", "Diffusion Models", "Computer Vision", "Ultralytics"]
