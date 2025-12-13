@@ -99,7 +99,7 @@ export const siteConfig: SiteConfig = {
   name: "Alexandre Sauquet",
   title: "CS @ Purdue '27",
   description:
-      `I'm is a third year student at Purdue University studying Computer Science, Artificial Intelligence, Statistics, and Mathematics. ` +
+      `I'm a third year student at Purdue University studying Computer Science, Artificial Intelligence, Statistics, and Mathematics. ` +
       `I'm particularly interested in machine learning and algorithms, with a focus on optimization methods and their real-world applications. ` +
       `I am currently working with <a href="https://ruizhezhang.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">Ruizhe Zhang</a> on extending proofs for the Edge of Stability to determine convergence improvements when using momentum.\n\n` +
       `Between research, classes, and internships, I enjoy training my own models and implementing techniques from research papers. ` +
