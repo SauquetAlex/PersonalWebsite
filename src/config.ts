@@ -103,7 +103,7 @@ export const siteConfig: SiteConfig = {
       `I'm particularly interested in machine learning and algorithms, with a focus on optimization methods and their real-world applications. ` +
       `I am currently working with <a href="https://ruizhezhang.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">Ruizhe Zhang</a> on extending proofs for the Edge of Stability to determine convergence improvements.\n\n` +
       `Between research, classes, and internships, I enjoy training my own models (for fun or to replicate papers) and scuba diving. ` +
-      `I am also involved in <a href="https://ml-purdue.github.io/" target="_blank" rel="noopener noreferrer" class="link link-primary">ML@Purdue</a> where I oversee project managers and give presentations on SOTA papers in our weekly reading group.`,
+      `I am also involved in <a href="https://mlpurdue.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">ML@Purdue</a> where I manage 10 project managers and their members, organize our hackathon Catapult, and give presentations on SOTA papers in our weekly reading group.`,
   avatar: "../assets/portrait.png",
   // avatar: "",
   location: "🇺🇸 USA, CA",
