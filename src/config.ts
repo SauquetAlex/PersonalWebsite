@@ -107,11 +107,11 @@ export const siteConfig: SiteConfig = {
   avatar: "../assets/portrait.png",
   // avatar: "",
   location: "🇺🇸 USA, CA",
-  // email: "sauquetalex@gmail.com",
+  // email: "alex@sauquet.ai",
   socialLinks: {
     github: "https://github.com/SauquetAlex",
     linkedin: "https://www.linkedin.com/in/alexandre-sauquet/",
-    email: "mailto:sauquetalex@gmail.com",
+    email: "mailto:alex@sauquet.ai",
     // twitter: "https://twitter.com/leowg",
     // bluesky: "https://bsky.app/profile/lauroguedes.bsky.social",
     // instagram: "https://instagram.com/lauroguedes.dev",
