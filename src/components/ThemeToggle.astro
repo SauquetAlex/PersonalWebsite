@@ -1,9 +1,9 @@
 ---
-// Theme toggle component for switching between nord and dim modes
+// Theme toggle component for switching between nord and dark modes
 ---
 
 <label class="swap swap-rotate">
-  <input type="checkbox" class="theme-controller" value="dim" />
+  <input type="checkbox" class="theme-controller" value="dark" />
 
   <!-- sun icon -->
   <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -20,11 +20,11 @@
   // Set theme on page load based on localStorage or system preference
   function setTheme() {
     const theme = localStorage.getItem('theme') ||
-                  (window.matchMedia('(prefers-color-scheme: dim)').matches ? 'dim' : 'nord');
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'nord');
     document.documentElement.setAttribute('data-theme', theme);
     const toggle = document.querySelector('.theme-controller');
     if (toggle) {
-      toggle.checked = theme === 'dim';
+      toggle.checked = theme === 'dark';
     }
   }
 
@@ -32,7 +32,7 @@
   document.addEventListener('change', (e) => {
     const target = e.target;
     if (target.classList.contains('theme-controller')) {
-      const theme = target.checked ? 'dim' : 'nord';
+      const theme = target.checked ? 'dark' : 'nord';
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
     }

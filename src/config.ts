@@ -99,14 +99,14 @@ export const siteConfig: SiteConfig = {
   name: "Alexandre Sauquet",
   title: "CS @ Purdue '27 · SWE Intern @ Google",
   description:
-      `I'm a senior at Purdue University studying Computer Science, Artificial Intelligence, Statistics, and Mathematics. ` +
-      `I'm particularly interested in machine learning and algorithms, with a focus on optimization methods and their real-world applications. ` +
-      `I recently wrapped up research with <a href="https://ruizhezhang.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">Ruizhe Zhang</a>, where I worked on extending proofs for the Edge of Stability to characterize convergence improvements for regularized logistic regression.\n\n` +
-      `Between research, classes, and internships, I enjoy training my own models (for fun or to replicate papers) and scuba diving. ` +
-      `I am also involved in <a href="https://mlpurdue.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">ML@Purdue</a> where I manage 10 project managers and their members, organize our hackathon Catapult, and give presentations on SOTA papers in our weekly reading group.`,
+    `I'm a senior at Purdue University studying Computer Science, Artificial Intelligence, Statistics, and Mathematics. ` +
+    `I'm particularly interested in machine learning and algorithms, with a focus on optimization methods and their real-world applications. ` +
+    `I recently wrapped up research with Professor <a href="https://ruizhezhang.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">Ruizhe Zhang</a>, where I worked on extending proofs for the Edge-of-Stability to characterize convergence improvements for regularized logistic regression.\n\n` +
+    `Between research, classes, and internships, I enjoy training my own models (for fun or to replicate papers) and scuba diving. ` +
+    `I am also involved in <a href="https://mlpurdue.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">ML@Purdue</a>, where I lead ten project managers and ~70 members, organize our hackathon <a href="https://catapulthack.com/" target="_blank" rel="noopener noreferrer" class="link link-primary">Catapult</a>, and present papers at our weekly reading group.`,
   avatar: "../assets/portrait.png",
   // avatar: "",
-  location: "🇺🇸 USA, CA",
+  // location: "🇺🇸 USA, CA",
   // email: "alex@sauquet.ai",
   socialLinks: {
     github: "https://github.com/SauquetAlex",

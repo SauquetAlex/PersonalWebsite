@@ -7,4 +7,4 @@ endDate: "2024-08-02"
 link: "https://www.duarte.com/"
 ---
 
-Built AI pipelines using HuggingFace and LlamaIndex for [Duarte AI](https://www.duarte.com/ai-presentation-generator/), an empathy and story-driven presentation generator. The system increased production speed by 29% and incorporated multimodal models to analyze user-uploaded content with safety guardrails.
+Built HuggingFace and LlamaIndex pipelines for [Duarte AI](https://www.duarte.com/ai-presentation-generator/), an empathy-driven presentation generator that cut production time 29% while adding guarded multimodal analysis of user-uploaded content.
