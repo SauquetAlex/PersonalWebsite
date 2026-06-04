@@ -7,4 +7,4 @@ endDate: "2025-08-15"
 link: "https://www.castsoftware.com/"
 ---
 
-Integrated CAST Software's code analysis platform with MCP servers, enabling AI-powered insights from 150+ technologies directly in GitHub Copilot and VS Code. Built APIs and optimized deployment for 44 MCP tools, connecting legacy analysis systems to modern AI agentic assistants and streamlining enterprise implementation by containerizing with Docker.
+Developed 44 MCP tool APIs connecting CAST's 150+ language code-analysis platform to AI agents in Copilot and VS Code, turning 20+ UI steps into one prompt.

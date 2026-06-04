@@ -7,4 +7,4 @@ endDate: "2023-06-17"
 link: "https://www.probabilitymanagement.org/"
 ---
 
-Contributed to development of Excel add-in Monte Carlo simulation tools by testing meta-logistic distribution implementations, conducting validation testing, and creating comprehensive user documentation.
+Validated meta-logistic distribution implementations for Excel Monte Carlo simulation add-ins, owning validation testing and end-user documentation.
