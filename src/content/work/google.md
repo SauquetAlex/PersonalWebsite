@@ -6,4 +6,4 @@ startDate: "2026-05-18"
 link: "https://about.google/"
 ---
 
-Improving user recommendations for Google Workspace to optimize monetization. 
+Optimizing Workspace monetization by engineering experimentation pipelines to test promotional strategies.
